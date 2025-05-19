@@ -1,14 +1,14 @@
-package com.example.demo.service;
+package com.smartHomeSystem.smartHomeSystemService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.example.demo.model.AirConditioner;
 import com.example.demo.model.Fan;
 import com.example.demo.model.Light;
 
 
-@Service
+@Component
 public class SystemControlService {
 	
 	@Autowired
@@ -40,5 +40,16 @@ public class SystemControlService {
 			ac.turnOff();	
 		}
 	}
+	
+	public Boolean getLightStatus() {
+		return light.getStatus();
+	}
 
+	public Boolean getAirConditionerStatus() {
+		return ac.getStatus();
+	}
+	
+	public Integer fanStatus() {
+		return fan.getSpeed();
+	}
 }
