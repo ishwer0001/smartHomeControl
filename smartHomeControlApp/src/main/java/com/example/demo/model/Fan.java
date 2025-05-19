@@ -11,21 +11,25 @@ public class Fan implements ApplianceControlStatus {
 		speed = 1;
 	}
 
-	public void setSpeed(Integer speed) {
+	public synchronized void setSpeed(Integer speed) {
 		this.speed = speed;
 		
 	}
 
 	@Override
-	public void turnOn() {
+	public synchronized  void turnOn() {
 		this.speed = 1;
 		
 	}
 
 	@Override
-	public void turnOff() {
+	public synchronized void turnOff() {
 		this.speed = 0;
 		
+	}
+	
+	public Integer getSpeed() {
+		return speed;
 	}
 
 

@@ -13,7 +13,7 @@ import com.example.demo.model.StatusValue;
 import com.example.demo.service.SystemControlService;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/homeSystemControl")
 public class SystemControlController {
 	@Autowired
 	SystemControlService service;
@@ -31,7 +31,7 @@ public class SystemControlController {
 		}		
 		service.updateLight(workingStatus);
 
-		ResponseEntity<String> res = new ResponseEntity<String>(status, HttpStatus.OK);
+		ResponseEntity<String> res = new ResponseEntity<String>(workingStatus.toString(), HttpStatus.OK);
 
 		return res;
 	}
@@ -41,12 +41,12 @@ public class SystemControlController {
 	 * @param speed
 	 * @return
 	 */
-	@RequestMapping(value = "/fan", method = RequestMethod.GET)
+	@RequestMapping(value = "fan", method = RequestMethod.GET)
 	public ResponseEntity<String> controlFan(@RequestParam String speed) {
 		int speedVal = Integer.valueOf(speed);
 		service.updateFanSpeed(speedVal);
 
-		ResponseEntity<String> en = new ResponseEntity<String>("true", HttpStatus.OK);
+		ResponseEntity<String> en = new ResponseEntity<String>(speed, HttpStatus.OK);
 
 		return en;
 	}
@@ -56,7 +56,7 @@ public class SystemControlController {
 	 * @param status
 	 * @return
 	 */
-	@RequestMapping(value = "/airConditioner", method = RequestMethod.GET)
+	@RequestMapping(value = "airConditioner", method = RequestMethod.GET)
 	public ResponseEntity<String> controlAirConditioner(@RequestParam String status) {
 		
 		Boolean workingStatus = false;
@@ -64,8 +64,39 @@ public class SystemControlController {
 			workingStatus = true;
 		}
 		service.updateAirConditioner(workingStatus);
-		ResponseEntity<String> en = new ResponseEntity<String>("true", HttpStatus.OK);
+		ResponseEntity<String> en = new ResponseEntity<String>(workingStatus.toString(), HttpStatus.OK);
 
 		return en;
+	}
+	
+	
+
+	@RequestMapping(value = "lightStatus", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> getLightStatus() {
+	
+		boolean status = service.getLightStatus();
+		ResponseEntity<Boolean> res = new ResponseEntity<Boolean>(status, HttpStatus.OK);
+
+		return res;
+	}
+
+
+	@RequestMapping(value = "fanStatus", method = RequestMethod.GET)
+	public ResponseEntity<Integer> fanStatus() {
+		int speed = service.getFanSpeed();
+
+		ResponseEntity<Integer> res = new ResponseEntity<Integer>(speed, HttpStatus.OK);
+
+		return res;
+	}
+
+
+	@RequestMapping(value = "airConditionerStatus", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> airConditionerStatus() {
+		
+		boolean status = service.getAirConditionerStatus();
+		ResponseEntity<Boolean> res = new ResponseEntity<Boolean>(status, HttpStatus.OK);
+
+		return res;
 	}
 }
