@@ -12,15 +12,19 @@ public class Light implements ApplianceControlStatus{
 	}
 
 	@Override
-	public void turnOn() {
+	public synchronized void turnOn() {
 		this.isOn = true;
 		
 	}
 
 	@Override
-	public void turnOff() {
+	public synchronized void turnOff() {
 		this.isOn = false;
 		
+	}
+	
+	public boolean getStatus() {
+		return isOn;
 	}
 
 }

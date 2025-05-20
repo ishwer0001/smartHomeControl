@@ -17,7 +17,7 @@ public class ScheduledJob {
 	SystemControlService service;
 
 
-    @Scheduled(cron = "0 1 1 1 *") // Runs every 5 seconds
+    @Scheduled(cron = "0 1 1 1 1 *") // Runs every 1st January 1:00 AM
     public void runJob() throws Exception {
     	service.updateAirConditioner(false);
     	service.updateLight(false);
