@@ -1,4 +1,4 @@
-package com.smartHomeSystem.smartHomeSystemService;
+package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,7 +49,7 @@ public class SystemControlService {
 		return ac.getStatus();
 	}
 	
-	public Integer fanStatus() {
+	public Integer getFanSpeed() {
 		return fan.getSpeed();
 	}
 }
